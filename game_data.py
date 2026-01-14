@@ -1,0 +1,337 @@
+#World related things
+world = {
+    #Start Position
+    "ambush area": {
+        "west": "forest",
+        "east": "woods",
+        "name": "Ambush Area",
+        "item": []
+    },
+    #Left side
+    "forest": {
+        "west": "town square",
+        "east": "ambush area",
+        "name": "Forest",
+        "desc": "You can see town houses on the horizon. If it's safe, you can find something for yourself in the houses.",
+        "item": []
+    },
+    "town square": {
+        "south": "town house",
+        "west": "middle house",
+        "north": "road",
+        "east": "forest",
+        "name": "Town Square",
+        "desc": "You've arrived at the town center; you can try entering the houses around you.",
+        "item": []
+    },
+    "town house": {
+        "north": "town square",
+        "west": "town house bedroom",
+        "south": "town house larder",
+        "name": "Town House - Enterance",
+        "item": []
+    },
+    "town house bedroom": {
+        "east": "town house",
+        "name": "Town House - Bedroom",
+        "item": ["key"]
+    },
+    "town house larder": {
+        "north": "town house",
+        "name": "Town House - Larder",
+        "item": ["herbs"]
+    },
+    "middle house": {
+        "east": "town square",
+        "west": "middle house bedroom",
+        "north": "middle house kitchen",
+        "south": "middle house workshop",
+        "name": "Town House - Enterance",
+        "item": []
+    },
+    "middle house bedroom": {
+        "east": "middle house",
+        "name": "Town House - Bedroom",
+        "item": []
+    },
+    "middle house kitchen": {
+        "south": "middle house",
+        "name": "Town House - Kitchen",
+        "item": []
+    },
+    "middle house workshop": {
+        "north": "middle house",
+        "name": "Town House - Workshop",
+        "desc": "A dusty workshop smelling of sawdust and oil. Tools hang on the walls.",
+        "locked": True,
+        "item": ["shovel", "key"]
+    },
+    "road": {
+        "south": "town square",
+        "west": "big house",
+        "north": "road2",
+        "name": "Road",
+        "item": []
+    },
+    "big house": {
+        "west": "big house hallway",
+        "south": "big house guest room",
+        "east": "road",
+        "name": "Town House - Enterance",
+        "item": []
+    },
+    "big house hallway": {
+        "south": "big house kitchen",
+        "north": "big house bedroom",
+        "east": "big house",
+        "name": "Town House - Hallway",
+        "desc": "The floorboards creak slightly under your feet here.",
+        "item": []
+    },
+    "big house guest room": {
+        "north": "big house",
+        "name": "Town House - Guest Room",
+        "desc": "A smaller, simpler room. It looks like it hasn't been used in a while.",
+        "item": []
+    },
+    "big house bedroom": {
+        "south": "big house hallway",
+        "west": "big house kitchen",
+        "name": "Town House - Master Bedroom",
+        "item": []
+    },
+    "big house kitchen": {
+        "north": "big house hallway",
+        "east": "big house bedroom",
+        "west": "deep forest",
+        "name": "Town House - Kitchen",
+        "item": ["bandage"]  
+    },
+    "deep forest": {
+        "west": "cliffs",
+        "east": "big house kitchen",
+        "name": "Deep Forest",
+        "desc": "The trees are so thick here that they block out the sun. You feel like you're being watched.",
+        "item": []
+    },
+    "cliffs": { #Optional ending
+        "east": "deep forest",
+        "name": "Cliffs",
+        "desc": "You are standing on the edge of extremly high cliffs. The wind is howling...",
+        "chest_found": False,
+        "item": ["key"]
+    },
+    "road2": {
+        "south": "road",
+        "north": "road3",
+        "name": "Road",
+        "item": []
+    },
+    "road3": {
+        "south": "road2",
+        "east": "road4",
+        "name": "Road",
+        "north": "town hall enterance",
+        "item": []
+    },
+    "safe road": {
+        "east": "safe road2",
+        "south": "storage",
+        "name": "Safe Road",
+        "desc": "You're traveling on a well-lit road that looks safe. Guards are visible in the distance. You're about to escape!",
+        "item": []
+    },
+    "safe road2": {
+        "east": "castle",
+        "west": "safe road",
+        "name": "Safe Road",
+        "desc": "You're traveling on a well-lit road that looks safe. Guards are visible in the distance. You're about to escape!",
+        "item": []
+    },
+    #Middle area
+    "road4": {
+        "west": "road3",
+        "east": "abondoned camp",
+        "name": "Road",
+        "item": []
+    },
+    "abondoned camp": {
+        "west": "road4",
+        "north": "lighted road",
+        "east": "old road",
+        "name": "Abondoned Camp",
+        "desc": "You've come to an abandoned campsite. People who camped here may have left some belongings behind.",
+        "item": ["herbs"]
+    },
+    "lighted road": {
+        "north": "guards",
+        "south": "abondoned camp",
+        "name": "Lighted Road",
+        "desc": "You're traveling on a well-lit road that looks safe. Guards are visible in the distance. You're about to escape!",
+        "item": []
+    },
+    "guards": { #Directions are irrelevant / ending
+        "north": "castle",
+        "south": "lighted road",
+        "name": "Guards",
+        "item": []
+    },
+    #Right side
+    "woods": {
+        "west": "ambush area",
+        "east": "deep forest2",
+        "north": "forest2",
+        "name": "Woods",
+        "desc": "It is unnaturally quiet. Not even the birds are singing. Something is wrong.",
+        "item": []
+    },
+    "deep forest2": {
+        "west": "woods",
+        "north": "bandit camp",
+        "name": "Deep Forest",
+        "desc": "This place doesn't look safe, you should be careful. Also, you can see smoke in the distance; someone has probably set up camp. It might be someone who knows the area.",
+        "item": ["herbs"]
+    },
+    "bandit camp": {
+        "north": "old road",
+        "south": "deep forest2",
+        "name": "Bandit Camp",
+        "desc": "A cold shiver runs down your spine. This place reeks of death.",
+        "item": ["key", "bandage", "armor"]
+    },
+    "old road": {
+        "north": "old road2",
+        "south": "bandit camp",
+        "name": "Old Road",
+        "desc": "This place doesn't seem very safe, you should be careful.",
+        "item": []
+    },
+    "old road2": {
+        "west": "abondoned camp",
+        "south": "old road",
+        "name": "Old Road",
+        "desc": "There are fresh footprints in the mud that don't look like they belong to a soldier.",
+        "item": []
+    },
+    "forest2": {
+        "south": "woods",
+        "north": "forest3",
+        "name": "Forest",
+        "desc": "This place doesn't seem very safe, you should be careful.",
+        "chest_found": False,
+        "item": []
+    },
+    "forest3": {
+        "north": "forest4",
+        "south": "forest2",
+        "name": "Forest",
+        "desc": "This place doesn't seem very safe, you should be careful.",
+        "item": []
+    },
+    "forest4": {
+        "north": "old road2",
+        "south": "forest3",
+        "name": "Forest",
+        "desc": "This place doesn't seem very safe, you should be careful.",
+        "item": ["herbs"]
+    },
+    #Ending
+    "castle": { #Anything inside of this area are irrelevant because ending zone
+        "west": "safe road2",
+        "south": "guards",
+        "name": "Castle",
+        "item": []
+    },
+    #Building Interiors
+    "town hall enterance": {
+        "west": "archives",
+        "east": "courtroom",
+        "north": "town hall hallway",
+        "south": "road3",
+        "name": "Town Hall - Enterance",
+        "desc": "The entrance is silent. A dusty reception desk sits empty in the corner.",
+        "item": []
+    },
+    "archives": {
+        "east": "town hall enterance",
+        "name": "Town Hall - Archives",
+        "desc": "The room smells of old paper and decaying parchment. Rows of shelves tower over you.",
+        "locked": True,
+        "chest_found": True,
+        "item": []
+    },
+    "treasury": {
+        "west": "town hall hallway",
+        "name": "Town Hall - Treasury",
+        "desc": "The air is cold here. Thick stone walls suggest this room was built to keep things safe.",
+        "locked": True,
+        "item": ["gold coin"]
+    },
+    "town hall hallway": {
+        "north": "mayor's office",
+        "south": "town hall enterance",
+        "west": "council chamber",
+        "east": "treasury",
+        "name": "Town Hall - Hallway",
+        "desc": "A long corridor stretches out. Portraits of past mayors seem to watch you from the walls.",
+        "item": []
+    },
+    "council chamber": {
+        "north": "storage",
+        "east": "town hall hallway",
+        "name": "Town Hall - Council Chamber",
+        "desc": "A heavy oak table sits in the center, worn smooth by years of use. Stacks of tax ledgers and a dried-up inkwell are left on top.",
+        "item": []
+    },
+    "mayor's office": {
+        "west": "storage",
+        "south": "town hall hallway",
+        "name": "Town Hall - Mayor's Office",
+        "desc": "It looks like someone left in a hurry. Papers are scattered across the fancy desk.",
+        "item": ["bandage"]
+    },
+    "storage": {
+        "south": "council chamber",
+        "east": "mayor's office",
+        "north": "safe road",
+        "name": "Town Hall - Storage",
+        "desc": "Just a small storage room. There is barely enough space to turn around.",
+        "locked": True,
+        "item": []
+    },
+    "courtroom": {
+        "west": "town hall enterance",
+        "name": "Town Hall - Courtroom",
+        "desc": "Rows of empty wooden benches face the front. You feel like you are on trial.",
+        "item": []
+    }
+}
+
+#Item related things
+item_list = ["key", "bandage", "armor", "herbs", "shovel", "gold coin"]
+
+useableItems = {
+    "bandage": {"heal": 25},
+    "herbs": {"heal": 15},
+    "armor": {"armor": 15},
+}
+
+itemMessages = {
+    "gold coin": {
+        "look": "There is a shiny [loot]gold coin[/loot] on the ground.",
+        "message": "You can't use a coin. Maybe buy someting?"
+    },
+    "key": {
+        "look": "A small [loot]key[/loot] glints on the dusty floor.",
+        "message": "You can't use a key directly here. Maybe you could try going through a locked door or open a chest."
+    },
+    "bandage": {
+        "look": "A roll of clean [loot]bandage[/loot] has been left on the table."
+    },
+    "herbs": {
+        "look": "Some fresh [loot]herbs[/loot] are growing in a crack in the stone."
+    },
+    "armor": {
+        "look": "A set of heavy [loot]armor[/loot] sits on a stand."
+    },
+}
