@@ -1,4 +1,3 @@
-import random
 from game_data import world, itemMessages
 from core_codes import move_player, take_item, use_item, save_game, load_game, create_hero
 from Characters import Hero
