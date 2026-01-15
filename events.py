@@ -71,10 +71,10 @@ def merchant_event(my_hero, inventory):
         slow_print("MERCHANT: Wait... You have no gold! Come back when you can pay!", style="dialogue")
     slow_print("="*30 + "\n")
 
-def villager_talk(my_hero, world):
-    slow_print("\n" + "-"*20)
+def villager_talk(my_hero, world, currentlocation):
     
     if world.get("bandit camp", {}).get("cleared", False) == True:
+        slow_print("\n" + "-"*20)
         hero_dialogues = [
             "VILLAGER: You killed the Bandit Leader! You are our hero!",
             "VILLAGER: We are finally free! Please, take whatever you need from my house.",
@@ -82,55 +82,57 @@ def villager_talk(my_hero, world):
             "VILLAGER: The King will surely reward you for this!"
         ]
         slow_print(f"{random.choice(hero_dialogues)}", style="dialogue")
+        slow_print("\n" + "-"*20)
         
     else:
         chance = random.randint(1, 100)
-        
-        if chance <= 10: #Low chance of villager attacking us
-            slow_print("VILLAGER: I won't let you hurt anyone else! DIE TRAITOR!", style="danger")
-            slow_print("(The villager grabs a pitchfork and attacks you in a blind panic!)")
-        
-            angry_villager = Enemy("Angry Villager", 40, 5)
+        slow_print("\n" + "-"*20)
 
-            fight_result = start_fight(my_hero, angry_villager)
+        if world[currentlocation].get("cleared", False) == False:
+            if chance <= 100: #Low chance of villager attacking us
+                slow_print("VILLAGER: I won't let you hurt anyone else! DIE TRAITOR!", style="danger")
+                slow_print("(The villager grabs a pitchfork and attacks you in a blind panic!)")
             
-            if fight_result:
-                slow_print("You knocked the villager unconscious. You feel bad about hurting an innocent...")
-        
-        if chance <= 40:
-            suspicious_dialogues = [
-                "VILLAGER: Get out! You look just like those bandits!",
-                "VILLAGER: Did you kill the knights? Stay away from my family!",
-                "VILLAGER: I don't trust you. You have blood on your hands.",
-                "VILLAGER: Don't hurt me! Take what you want and leave!",
-                "VILLAGER: You're one of them, aren't you? A traitor!",
-                "VILLAGER: My husband went to the woods and never came back. Was it YOU?!"
-            ]
-            slow_print(f"{random.choice(suspicious_dialogues)}", style="danger")
-            slow_print("(The villager backs away slowly, holding a kitchen knife.)")
+                angry_villager = Enemy("Angry Villager", 40, 5)
 
-        elif chance <= 70:
-            info_dialogues = [
-                "VILLAGER: I saw smoke rising from the deep forest. The bandit camp must be there.",
-                "VILLAGER: The Mayor hid something in the archives before he fled. But it's locked.",
-                "VILLAGER: Be careful on the cliffs. The ground is unstable.",
-                "VILLAGER: I heard the merchant in the town square likes gold coins.",
-                "VILLAGER: Those bandits... they have heavy armor. You'll need a strong weapon."
-            ]
-            slow_print(f"{random.choice(info_dialogues)}", style="dialogue")
-
-        else:
-            friendly_dialogues = [
-                "VILLAGER: Please help us... We have no food left.",
-                "VILLAGER: May the gods protect you, traveler.",
-                "VILLAGER: It's dangerous to go alone. Watch your back.",
-                "VILLAGER: If you see the King, tell him we are still loyal."
-            ]
-            slow_print(f"{random.choice(friendly_dialogues)}", style="dialogue")
-
-    slow_print("-" * 20 + "\n")
-
+                fight_result = start_fight(my_hero, angry_villager)
+                
+                if fight_result:
+                    slow_print("You knocked the villager unconscious. You feel bad about hurting an innocent...")
+                    world[currentlocation]["cleared"] = True
             
+            elif chance <= 40:
+                suspicious_dialogues = [
+                    "VILLAGER: Get out! You look just like those bandits!",
+                    "VILLAGER: Did you kill the knights? Stay away from my family!",
+                    "VILLAGER: I don't trust you. You have blood on your hands.",
+                    "VILLAGER: Don't hurt me! Take what you want and leave!",
+                    "VILLAGER: You're one of them, aren't you? A traitor!",
+                    "VILLAGER: My husband went to the woods and never came back. Was it YOU?!"
+                ]
+                slow_print(f"{random.choice(suspicious_dialogues)}", style="danger")
+                slow_print("(The villager backs away slowly, holding a kitchen knife.)")
+
+            elif chance <= 70:
+                info_dialogues = [
+                    "VILLAGER: I saw smoke rising from the deep forest. The bandit camp must be there.",
+                    "VILLAGER: The Mayor hid something in the archives before he fled. But it's locked.",
+                    "VILLAGER: Be careful on the cliffs. The ground is unstable.",
+                    "VILLAGER: I heard the merchant in the town square likes gold coins.",
+                    "VILLAGER: Those bandits... they have heavy armor. You'll need a strong weapon."
+                ]
+                slow_print(f"{random.choice(info_dialogues)}", style="dialogue")
+
+            else:
+                friendly_dialogues = [
+                    "VILLAGER: Please help us... We have no food left.",
+                    "VILLAGER: May the gods protect you, traveler.",
+                    "VILLAGER: It's dangerous to go alone. Watch your back.",
+                    "VILLAGER: If you see the King, tell him we are still loyal."
+                ]
+                slow_print(f"{random.choice(friendly_dialogues)}", style="dialogue")
+            slow_print("-" * 20 + "\n")
+         
 def archives_puzzle():
     slow_print("\n" + "="*40)
     slow_print("You found an ancient locked chest in the Archives.")
@@ -169,7 +171,7 @@ def check_locations(my_hero, world, currentlocation, inventory, dangerous_locati
 
     # Villager Check
     elif currentlocation in ["town house", "middle house", "big house"]:
-        villager_talk(my_hero, world)
+        villager_talk(my_hero, world, currentlocation)
 
     # Cliffs Check
     elif currentlocation == "cliffs":
