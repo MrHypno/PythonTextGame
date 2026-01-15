@@ -196,9 +196,16 @@ def check_locations(my_hero, world, currentlocation, inventory, dangerous_locati
     
     # Random Fight Check
     elif currentlocation in ["forest3", "road4"]:
-        slow_print("\nThere is a Bandit waiting for you in the shadows!")
-        my_enemy = create_random_enemy()
-        fight_result = start_fight(my_hero, my_enemy)
+        if world[currentlocation].get("cleared", False) == False:
+            slow_print("\nThere is a Bandit waiting for you in the shadows!")
+    
+            my_enemy = create_random_enemy()
+            fight_result = start_fight(my_hero, my_enemy)
+            
+            if fight_result:
+                world[currentlocation]["cleared"] = True
+        else:
+            slow_print("You see a bandit's corpse on the ground, crows swarming over it.")
 
     # Archives Check
     elif currentlocation == "archives":
