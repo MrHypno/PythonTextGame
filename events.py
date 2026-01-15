@@ -219,7 +219,7 @@ def check_locations(my_hero, world, currentlocation, inventory, dangerous_locati
             slow_print("The chest in the corner is empty and open.")
 
     #Random encounters
-    elif currentlocation in dangerous_locations and random.randint(1, 100) <= 80:
+    elif currentlocation in dangerous_locations and random.randint(1, 100) <= 20:
             my_enemy = create_random_enemy() 
             fight_result = start_fight(my_hero, my_enemy)
                 
